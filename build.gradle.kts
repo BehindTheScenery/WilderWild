@@ -25,7 +25,6 @@ buildscript {
 
 plugins {
     id("fabric-loom") version("+")
-    id("io.github.juuxel.loom-quiltflower") version("+")
     id("org.quiltmc.gradle.licenser") version("+")
     id("org.ajoberstar.grgit") version("+")
     id("com.modrinth.minotaur") version("+")
@@ -58,7 +57,6 @@ val betternether_version: String by project
 val modmenu_version: String by project
 val cloth_config_version: String by project
 val copperpipes_version: String by project
-val nbtcrafting_version: String by project
 val terrablender_version: String by project
 val terralith_version: String by project
 val tomsstorage_version: String by project
@@ -253,9 +251,6 @@ dependencies {
         exclude(group = "com.terraformersmc")
     }
 
-    // NBT Crafting
-    modImplementation("maven.modrinth:nbt-crafting:${nbtcrafting_version}")?.let { include(it) }
-
     // CaffeineConfig
     modImplementation("net.caffeinemc:mixin-config:1.0.0+1.17")?.let { include(it) }
 
@@ -314,9 +309,6 @@ dependencies {
     }
 }
 
-quiltflower {
-    quiltflowerVersion.set("1.8.0")
-}
 
 tasks {
     processResources {
@@ -577,7 +569,6 @@ curseforge {
             optionalDependency("terrablender-fabric")
             optionalDependency("simple-copper-pipes")
             embeddedLibrary("frozenlib")
-            embeddedLibrary("nbt-crafting")
         })
         mainArtifact(remapJar, closureOf<CurseArtifact> {
             displayName = display_name
@@ -616,7 +607,6 @@ modrinth {
         optional.project("modmenu")
         optional.project("simple-copper-pipes")
         embedded.project("frozenlib")
-        embedded.project("nbt-crafting")
     }
 }
 
